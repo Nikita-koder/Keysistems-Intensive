@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .app-list-item{
     margin: 10px auto;
 }
@@ -5,4 +6,13 @@
     display: flex;
     padding: 20px 0 50px 20px;
     max-width: 300px;
+=======
+.app-list-item{
+    margin: 10px auto;
+}
+.app-list-item-lebel img{
+    display: flex;
+    padding: 20px 0 50px 20px;
+    max-width: 300px;
+>>>>>>> 0e3b04a4cd6a4067981b053c261c5615f56fa5c9
 }

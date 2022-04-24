@@ -19,13 +19,13 @@ export default class PostAddForm extends Component{
             
         });
     }
-    onSub(e){
+    /*onSub(e){
         e.preventDefault;
         this.props.btnAddClick(this.state.text);
         this.setState({
             text: ''
         });
-    }
+    }*/
 
     render(){
         return(

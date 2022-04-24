@@ -1,0 +1,8 @@
+.app-list-item{
+    margin: 10px auto;
+}
+.app-list-item-lebel img{
+    display: flex;
+    padding: 20px 0 50px 20px;
+    max-width: 300px;
+}

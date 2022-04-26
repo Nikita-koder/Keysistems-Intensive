@@ -1,6 +1,5 @@
-<<<<<<< HEAD
 import React, { Component } from "react";
-
+/*eslist-disable*/
 export default class PostAddForm extends Component{
 
     constructor(props){
@@ -8,31 +7,30 @@ export default class PostAddForm extends Component{
         this.state = {
             text: ''
         }
-
-        this.ChangeValue = this.ChangeValue.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.ChangeValue = this.ChangeValue.bind(this);
     }
 
 
     ChangeValue(e){
         this.setState({
-            text: e.target.value
-            
+            text: e.target.value 
         });
     }
-    /*onSub(e){
-        e.preventDefault;
+    onSubmit(e){
+        e.preventDefault();
         this.props.btnAddClick(this.state.text);
         this.setState({
             text: ''
         });
-    }*/
+    }
+
 
     render(){
         return(
             <form 
                 className="post-add d-flex justify-content-between"
-                onSubmit={this.onSub}>
+                onSubmit={this.onSubmit}>
                 <input
                 className="post-add-form form-control"
                 type="text"
@@ -54,60 +52,3 @@ export default class PostAddForm extends Component{
     }
 }
 
-=======
-import React, { Component } from "react";
-
-export default class PostAddForm extends Component{
-
-    constructor(props){
-        super(props);
-        this.state = {
-            text: ''
-        }
-
-        this.ChangeValue = this.ChangeValue.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-    }
-
-
-    ChangeValue(e){
-        this.setState({
-            text: e.target.value
-            
-        });
-    }
-    /*onSub(e){
-        e.preventDefault;
-        this.props.btnAddClick(this.state.text);
-        this.setState({
-            text: ''
-        });
-    }*/
-
-    render(){
-        return(
-            <form 
-                className="post-add d-flex justify-content-between"
-                onSubmit={this.onSub}>
-                <input
-                className="post-add-form form-control"
-                type="text"
-                placeholder="What's the news?"
-                onChange={this.ChangeValue}
-                value={this.state.text}/>
-                <input
-                    className="file-input"
-                    type="file"
-                        
-                />
-                <button
-                    className="btn-add-news"
-                    type="submit">
-                        Добавить
-                </button>
-            </form>
-        )
-    }
-}
-
->>>>>>> 0e3b04a4cd6a4067981b053c261c5615f56fa5c9

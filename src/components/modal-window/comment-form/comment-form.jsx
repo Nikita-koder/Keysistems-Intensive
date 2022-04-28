@@ -6,18 +6,17 @@ export default class CommentForm extends Component{
         this.state = {
             text: ''
         }
-        this.onSubmit = this.onSubmit.bind(this);
-        this.ChangeValue = this.ChangeValue.bind(this);
+        this.onCommentSubmit = this.onCommentSubmit.bind(this);
+        this.CommentChangeValue = this.CommentChangeValue.bind(this);
     }
 
 
-    ChangeValue(e){
+    CommentChangeValue(e){
         this.setState({
             text: e.target.value 
         });
     }
-    onSubmit(e){
-        console.log(this.props.postId)
+    onCommentSubmit(e){
         e.preventDefault();
         this.props.btnCommentAdd(this.state.text, this.props.postId);
         this.setState({
@@ -28,12 +27,12 @@ export default class CommentForm extends Component{
     render(){
         return(
             <form className="comment-form d-flex"
-                onSubmit={this.onSubmit}>
+                onSubmit={this.onCommentSubmit}>
                     <input
                         className="comment-add-form form-control"
                         type="text"
                         placeholder="Write your comment"
-                        onChange={this.ChangeValue}
+                        onChange={this.CommentChangeValue}
                         value={this.state.text}/>
                     <button type="submit" className="btn btn-light">Enter</button>
             </form>

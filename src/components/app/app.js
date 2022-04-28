@@ -6,23 +6,22 @@ import PostStatusFilter from "../post-status-filter";
 import PostList from "../post-list";
 import PostAddForm from "../post-add-form";
 import ModalWindow from "../modal-window";
-import PostListItem from "../post-list-item";
 
 export default class App extends Component{
     constructor(props){
         super(props);
         this.state = {
             data :[
-                {label: "Hello World!", likes: 0, id:'qwer'},
-                {label: "Today is good day!!", likes: 0,  id:'qwet'},
-                {label: "I'am fine", likes: 0,  id:'qwey'}],
+                {label: "Hello World!", imgSrc: 'https://images.unsplash.com/photo-1494427919973-20a682389d91?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1335&q=80', likes: 0, id:'qwer'},
+                {label: "Today is good day!!", imgSrc: 'https://images.unsplash.com/photo-1494427919973-20a682389d91?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1335&q=80', likes: 0,  id:'qwet'},
+                {label: "I'am fine", imgSrc: 'https://images.unsplash.com/photo-1494427919973-20a682389d91?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1335&q=80', likes: 0,  id:'qwey'}],
 
             commentsData :[
                 {CommentsId: 1, postId: 'qwer', text: 'Hello!'},
                 {CommentsId: 2, postId: 'qwer', text: 'Hello!'}
             ],
             show: false,
-            selectPostId: null,
+            selectPostId: null
             
         };
         
@@ -32,7 +31,7 @@ export default class App extends Component{
         this.btnDeleteClick = this.btnDeleteClick.bind(this);
         this.btnLikesClick = this.btnLikesClick.bind(this);
         this.btnAddClick = this.btnAddClick.bind(this);
-
+        this.btnCommentAdd = this.btnCommentAdd(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleShow = this.handleShow.bind(this);
         //this.modalPost = null;
@@ -93,20 +92,15 @@ export default class App extends Component{
     }
 
     btnCommentAdd(text, postId){
-        console.log(text, postId);
-        this.commentId++;
+        let idForClick = this.commentId++;
 
-        let myId = this.commentId;
-        
+        console.log(idForClick)
         const newItem = {
-            CommentsId: myId,
+            CommentsId: idForClick,
             postId: postId,
             text: text
         };
-        console.log(newItem);
-        //console.log(myId, newItem)
-
-        
+        //console.log(text, postId);
         this.setState(({commentsData}) =>{
             const newData = [...commentsData, newItem];
             return{
@@ -127,17 +121,15 @@ export default class App extends Component{
                     btnDeleteClick={this.btnDeleteClick}
                     handleShow={this.handleShow}
                     />
-                <PostListItem
-                    props={this.state.data}
-                    btnLikesClick={this.btnLikesClick}/>
+                
                 <PostAddForm
                     btnAddClick = {this.btnAddClick}/>
                 <ModalWindow
                     post={this.modalPost}
                     show={this.state.show}
                     handleClose={this.handleClose}
-                    btnLikesClick={this.btnLikesClick}
                     btnCommentAdd={this.btnCommentAdd}
+                    btnLikesClick={this.btnLikesClick}
                     commentsData={this.state.commentsData}>
                     
                 </ModalWindow>

@@ -5,7 +5,7 @@ import CommentBox from "./comment-box";
 export default class ModalWindow extends Component {
     
     render(){
-        const {post, show, handleClose, btnLikesClick, commentsData} = this.props;
+        const {post, show, handleClose, btnLikesClick, btnComentAdd, commentsData} = this.props;
         const {label, likes} = {...post}
         //console.log(post.id);
         return (
@@ -28,8 +28,8 @@ export default class ModalWindow extends Component {
                     </Modal.Body>
                     <Modal.Footer>
                         <CommentBox commentData = {commentsData}
-                            postId={post}
-                            btnCommentAdd={this.props.btnCommentAdd}/>
+                            btnComentAdd={btnComentAdd}
+                            postId={post}/>
                     </Modal.Footer>
                 </Modal>
             </>

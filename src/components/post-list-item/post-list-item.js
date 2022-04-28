@@ -21,20 +21,21 @@ export default class PostListItem extends Component{
 
     render(){
         
-        const {label, btnDeleteClick, btnLikesClick, handleShow} = this.props;
+        const {label, imgSrc, btnDeleteClick, btnLikesClick, handleShow} = this.props;
         //const {likes} = this.state;
         return(
-            <div className="app-list-item d-flex justify-content-center align-items-center"
+            <div className="app-list-item d-flex flex-column justify-content-center align-items-center"
                 >
-                <span className="app-list-item-lebel"
+                <div className="d-flex app-list-item-lebel"
                     >
                     <img
-                        src="#" alt="Фотография поста"
+                        className="post-list-img d-block"
+                        src={imgSrc} alt="Фотография поста"
                         onClick={handleShow}/>
                    
-                    <p> {label}</p>
-                </span>
-                <div className="d-block justify-content-center align-items-center">
+                    <p className="post-list-par d-block text-center"> {label}</p>
+                </div>
+                <div className="d-flex justify-content-center align-items-center">
                     
                     <button
                         className="btn-likes"

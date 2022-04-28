@@ -17,6 +17,7 @@ export default class CommentForm extends Component{
         });
     }
     onSubmit(e){
+        console.log(this.props.postId)
         e.preventDefault();
         this.props.btnCommentAdd(this.state.text, this.props.postId);
         this.setState({

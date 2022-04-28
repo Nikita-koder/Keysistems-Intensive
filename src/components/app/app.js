@@ -23,12 +23,12 @@ export default class App extends Component{
             ],
             show: false,
             selectPostId: null,
-            commentId : 0
+            
         };
         
         this.newId = 'Id';
         this.newIdIter = 0;
-        
+        this.commentId = 0;
         this.btnDeleteClick = this.btnDeleteClick.bind(this);
         this.btnLikesClick = this.btnLikesClick.bind(this);
         this.btnAddClick = this.btnAddClick.bind(this);
@@ -93,9 +93,10 @@ export default class App extends Component{
     }
 
     btnCommentAdd(text, postId){
-        console.log(text, postId, this.state.commentId);
-        
-        let myId = ++myId;
+        console.log(text, postId);
+        this.commentId++;
+
+        let myId = this.commentId;
         
         const newItem = {
             CommentsId: myId,
@@ -103,7 +104,7 @@ export default class App extends Component{
             text: text
         };
         console.log(newItem);
-        console.log(myId, newItem)
+        //console.log(myId, newItem)
 
         
         this.setState(({commentsData}) =>{

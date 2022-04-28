@@ -10,8 +10,7 @@ const PostList = ({props, btnDeleteClick, handleShow}) =>{
                 <PostListItem
                 {...item}
                 btnDeleteClick = {()=>btnDeleteClick(item.id)}
-                handleShow = {handleShow}/>
-                    
+                handleShow = {()=>handleShow(item.id)}/>
             </li>
         )
     });

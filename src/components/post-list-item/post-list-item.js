@@ -8,20 +8,20 @@ export default class PostListItem extends Component{
         this.state={
             likes: props.likes
         }
-        this.btnLikesClick = this.btnLikesClick.bind(this);
+        //this.btnLikesClick = this.btnLikesClick.bind(this);
     }
 
-    btnLikesClick(){
+    /*btnLikesClick(){
         this.setState(state=>({
             likes: ++state.likes
         }))
-    }
+    }*/
 
     
 
     render(){
         
-        const {id, label, btnDeleteClick, handleShow} = this.props;
+        const {label, btnDeleteClick, btnLikesClick, handleShow} = this.props;
         //const {likes} = this.state;
         return(
             <div className="app-list-item d-flex justify-content-center align-items-center"
@@ -30,7 +30,7 @@ export default class PostListItem extends Component{
                     >
                     <img
                         src="#" alt="Фотография поста"
-                        onClick={handleShow(id)}/>
+                        onClick={handleShow}/>
                    
                     <p> {label}</p>
                 </span>
@@ -38,7 +38,7 @@ export default class PostListItem extends Component{
                     
                     <button
                         className="btn-likes"
-                        onClick={this.btnLikesClick}>
+                        onClick={btnLikesClick}>
                         Likes {this.state.likes}
                     </button>
                     <button

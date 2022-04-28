@@ -27,11 +27,11 @@ export default class App extends Component{
         
         this.newId = 'Id';
         this.newIdIter = 0;
-        this.commentId = 0;
+        this.commentId = 3;
         this.btnDeleteClick = this.btnDeleteClick.bind(this);
         this.btnLikesClick = this.btnLikesClick.bind(this);
         this.btnAddClick = this.btnAddClick.bind(this);
-        this.btnCommentAdd = this.btnCommentAdd(this);
+        this.btnCommentAdd = this.btnCommentAdd.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleShow = this.handleShow.bind(this);
         //this.modalPost = null;
@@ -92,7 +92,7 @@ export default class App extends Component{
     }
 
     btnCommentAdd(text, postId){
-        let idForClick = this.commentId++;
+        let idForClick = this.commentId;
 
         console.log(idForClick)
         const newItem = {
@@ -100,6 +100,7 @@ export default class App extends Component{
             postId: postId,
             text: text
         };
+        this.commentId++;
         //console.log(text, postId);
         this.setState(({commentsData}) =>{
             const newData = [...commentsData, newItem];

@@ -2,7 +2,8 @@
     margin: 10px auto;
 }
 .app-list-item-lebel img{
-    display: flex;
+    display: block;
     padding: 20px 0 50px 20px;
     max-width: 300px;
+    cursor: pointer;
 }

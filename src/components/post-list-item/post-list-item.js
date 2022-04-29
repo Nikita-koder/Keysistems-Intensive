@@ -33,7 +33,7 @@ export default class PostListItem extends Component{
                         src={imgSrc} alt="Фотография поста"
                         onClick={handleShow}/>
                    
-                    <p className="post-list-par d-block text-center"> {label}</p>
+                    <p className="post-list-par text-center"> {label}</p>
                 </div>
                 <div className="d-flex justify-content-center align-items-center">
                     

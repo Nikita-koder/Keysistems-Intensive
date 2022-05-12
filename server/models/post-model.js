@@ -10,7 +10,7 @@ const Post = function (posts) {
 };
 
 Post.create = (newPost, result) => {
-  sql.query("INSERT INTO posts_info SET ?", newPost, (err, res) => {
+  sql.query("INSERT INTO post_info SET ?", newPost, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -23,7 +23,7 @@ Post.create = (newPost, result) => {
 };
 
 Post.findById = (id, result) => {
-  sql.query(`SELECT * FROM posts_info WHERE id = ${id}`, (err, res) => {
+  sql.query(`SELECT * FROM post_info WHERE id = ${id}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -42,7 +42,7 @@ Post.findById = (id, result) => {
 };
 
 Post.getAll = (title, result) => {
-  let query = "SELECT * FROM posts_info";
+  let query = "SELECT * FROM post_info";
 
   if (title) {
     query += ` WHERE title LIKE '%${title}%'`;
@@ -61,7 +61,7 @@ Post.getAll = (title, result) => {
 };
 
 Post.getAllPublished = result => {
-  sql.query("SELECT * FROM posts_info WHERE likes=true", (err, res) => {
+  sql.query("SELECT * FROM post_info WHERE likes=true", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -75,7 +75,7 @@ Post.getAllPublished = result => {
 
 Post.updateById = (id, posts, result) => {
   sql.query(
-    "UPDATE posts_info SET label = ?, imgSrc = ?, likes = ?, commentsCounter = ? WHERE id = ?",
+    "UPDATE post_info SET label = ?, imgSrc = ?, likes = ?, commentsCounter = ? WHERE id = ?",
     [posts.label, posts.imgSrc, posts.likes, posts.commentsCounter, id],
     (err, res) => {
       if (err) {
@@ -97,7 +97,7 @@ Post.updateById = (id, posts, result) => {
 };
 
 Post.remove = (id, result) => {
-  sql.query("DELETE FROM posts_info WHERE id = ?", id, (err, res) => {
+  sql.query("DELETE FROM post_info WHERE id = ?", id, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -116,7 +116,7 @@ Post.remove = (id, result) => {
 };
 
 Post.removeAll = result => {
-  sql.query("DELETE FROM posts_info", (err, res) => {
+  sql.query("DELETE FROM post_info", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

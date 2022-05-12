@@ -41,11 +41,11 @@ Post.findById = (id, result) => {
   });
 };
 
-Post.getAll = (title, result) => {
+Post.getAll = (label, result) => {
   let query = "SELECT * FROM post_info";
 
-  if (title) {
-    query += ` WHERE title LIKE '%${title}%'`;
+  if (label) {
+    query += ` WHERE label LIKE '%${label}%'`;
   }
 
   sql.query(query, (err, res) => {

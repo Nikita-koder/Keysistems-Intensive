@@ -1,14 +1,16 @@
+const { posts } = require("../routes/post-routes.js");
 const sql = require("./db.js");
 
 //constructor
 const Post = function (posts) {
-    this.title = posts.title;
-    this.description = posts.description;
+    this.label = posts.label;
+    this.imgSrc = posts.imgSrc;
     this.likes = posts.likes;
+    this.commentsCounter = posts.commentsCounter
 };
 
 Post.create = (newPost, result) => {
-  sql.query("INSERT INTO posts SET ?", newPost, (err, res) => {
+  sql.query("INSERT INTO posts_info SET ?", newPost, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -21,7 +23,7 @@ Post.create = (newPost, result) => {
 };
 
 Post.findById = (id, result) => {
-  sql.query(`SELECT * FROM posts WHERE id = ${id}`, (err, res) => {
+  sql.query(`SELECT * FROM posts_info WHERE id = ${id}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -40,7 +42,7 @@ Post.findById = (id, result) => {
 };
 
 Post.getAll = (title, result) => {
-  let query = "SELECT * FROM posts";
+  let query = "SELECT * FROM posts_info";
 
   if (title) {
     query += ` WHERE title LIKE '%${title}%'`;
@@ -59,7 +61,7 @@ Post.getAll = (title, result) => {
 };
 
 Post.getAllPublished = result => {
-  sql.query("SELECT * FROM posts WHERE published=true", (err, res) => {
+  sql.query("SELECT * FROM posts_info WHERE likes=true", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -71,10 +73,10 @@ Post.getAllPublished = result => {
   });
 };
 
-Post.updateById = (id, tutorial, result) => {
+Post.updateById = (id, posts, result) => {
   sql.query(
-    "UPDATE posts SET title = ?, description = ?, published = ? WHERE id = ?",
-    [posts.title, posts.description, posts.published, id],
+    "UPDATE posts_info SET label = ?, imgSrc = ?, likes = ?, commentsCounter = ? WHERE id = ?",
+    [posts.label, posts.imgSrc, posts.likes, posts.commentsCounter, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -95,7 +97,7 @@ Post.updateById = (id, tutorial, result) => {
 };
 
 Post.remove = (id, result) => {
-  sql.query("DELETE FROM posts WHERE id = ?", id, (err, res) => {
+  sql.query("DELETE FROM posts_info WHERE id = ?", id, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -114,7 +116,7 @@ Post.remove = (id, result) => {
 };
 
 Post.removeAll = result => {
-  sql.query("DELETE FROM posts", (err, res) => {
+  sql.query("DELETE FROM posts_info", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

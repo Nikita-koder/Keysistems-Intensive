@@ -1,6 +1,6 @@
 const Post = require("../models/post-model.js");
 
-// Create and Save a new Tutorial
+// Создаём и сохраняем новые посты
 exports.create = (req, res) => {
   // Validate request
   if (!req.body) {
@@ -11,12 +11,17 @@ exports.create = (req, res) => {
 
   // Создание поста 
   const post = new Post({
-    title: req.body.title,
+    label : req.body.label,
+    imgSrc : req.body.imgSrc,
+    likes : req.body.likes,
+    commentsCounter : req.body.commentsCounter,
+
+    /*title: req.body.title,
     description: req.body.description,
-    like: req.body.like || false
+    like: req.body.like || false*/
   });
 
-  // Save Tutorial in the database
+  // Сохраняем Посты в БД
   Post.create(post, (err, data) => {
     if (err)
       res.status(500).send({
@@ -27,7 +32,7 @@ exports.create = (req, res) => {
   });
 };
 
-// Retrieve all Tutorials from the database (with condition).
+// Получаем все Посты из БД.
 exports.findAll = (req, res) => {
   const title = req.query.title;
 
@@ -41,7 +46,7 @@ exports.findAll = (req, res) => {
   });
 };
 
-// Find a single Tutorial by Id
+// Ищем Пост по ID
 exports.findOne = (req, res) => {
   Post.findById(req.params.id, (err, data) => {
     if (err) {
@@ -58,7 +63,7 @@ exports.findOne = (req, res) => {
   });
 };
 
-// find all published Tutorials
+// Ищем все опубликованные посты
 exports.findAllPublished = (req, res) => {
   Post.getAllPublished((err, data) => {
     if (err)
@@ -70,7 +75,7 @@ exports.findAllPublished = (req, res) => {
   });
 };
 
-// Update a Tutorial identified by the id in the request
+// Обновляем посты
 exports.update = (req, res) => {
   // Validate Request
   if (!req.body) {
@@ -100,7 +105,7 @@ exports.update = (req, res) => {
   );
 };
 
-// Delete a Tutorial with the specified id in the request
+// Удаляем посты
 exports.delete = (req, res) => {
   Post.remove(req.params.id, (err, data) => {
     if (err) {
@@ -117,7 +122,7 @@ exports.delete = (req, res) => {
   });
 };
 
-// Delete all Tutorials from the database.
+// Удаляем все посты
 exports.deleteAll = (req, res) => {
   Post.removeAll((err, data) => {
     if (err)

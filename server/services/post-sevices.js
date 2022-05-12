@@ -1,25 +1,26 @@
-import http from "/Програмирование/Интенсив от Кейсиситемс/React Prj/my-app/src/http-common";
+const express = require('express');
+const app = express();
 class TutorialDataService {
   getAll() {
-    return http.get("/posts");
+    return app.get("/posts");
   }
   get(id) {
-    return http.get(`/posts/${id}`);
+    return app.get(`/posts/${id}`);
   }
   create(data) {
-    return http.post("/posts", data);
+    return app.post("/posts", data);
   }
   update(id, data) {
-    return http.put(`/posts/${id}`, data);
+    return app.put(`/posts/${id}`, data);
   }
   delete(id) {
-    return http.delete(`/posts/${id}`);
+    return app.delete(`/posts/${id}`);
   }
   deleteAll() {
-    return http.delete(`/posts`);
+    return app.delete(`/posts`);
   }
   findByTitle(label) {
-    return http.get(`/posts?title=${label}`);
+    return app.get(`/posts?title=${label}`);
   }
 }
 export default new TutorialDataService();

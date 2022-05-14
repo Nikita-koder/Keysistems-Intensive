@@ -11,18 +11,10 @@ export default class App extends Component{
     constructor(props){
         super(props);
         this.state = {
-            data :[
-                {label: "Hello World!", imgSrc: 'https://images.unsplash.com/photo-1494427919973-20a682389d91?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1335&q=80', likes: 0, id:'qwer'},
-                {label: "Today is good day!!", imgSrc: 'https://images.unsplash.com/photo-1494427919973-20a682389d91?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1335&q=80', likes: 0,  id:'qwet'},
-                {label: "I'am fine", imgSrc: 'https://images.unsplash.com/photo-1494427919973-20a682389d91?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1335&q=80', likes: 0,  id:'qwey'}],
-
-            commentsData :[
-                {CommentsId: 1, postId: 'qwer', text: 'Hello!'},
-                {CommentsId: 2, postId: 'qwer', text: 'Hello!'}
-            ],
+            data :[],
+            commentsData :[],
             show: false,
             selectPostId: null
-            
         };
         
         this.newId = 'Id';
@@ -36,6 +28,25 @@ export default class App extends Component{
         this.handleShow = this.handleShow.bind(this);
         //this.modalPost = null;
     }
+    
+    componentDidMount() {
+        fetch("https://localhost:3001/post/")
+          .then(res => res.json())
+          .then(
+            (result) => {
+              this.setState({
+                data: result.post_info
+              });
+            },
+            // Примечание: важно обрабатывать ошибки именно здесь, а не в блоке catch(),
+            // чтобы не перехватывать исключения из ошибок в самих компонентах.
+            (error) => {
+              this.setState({
+                error
+              });
+            }
+          )
+      }
 
     btnLikesClick(){
         this.setState(state=>({

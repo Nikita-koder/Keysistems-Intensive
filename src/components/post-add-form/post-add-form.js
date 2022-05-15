@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 /*eslist-disable*/
 export default class PostAddForm extends Component{
 
@@ -12,17 +13,25 @@ export default class PostAddForm extends Component{
     }
 
 
-    ChangeValue(e){
+    ChangeValue(event){
         this.setState({
-            text: e.target.value 
+            text: event.target.value 
         });
     }
-    onSubmit(e){
-        e.preventDefault();
-        this.props.btnAddClick(this.state.text);
-        this.setState({
-            text: ''
-        });
+    onSubmit(event){
+        event.preventDefault();
+
+        const postItem = {
+            label: this.state.text,
+            imgSrc: null,
+            likes: 0,
+            commentsCounter: 0
+        }
+        axios.post("http://localhost:3001/post", postItem)
+        .then(res => {
+          console.log(res);
+          console.log(res.data);
+        })
     }
 
 

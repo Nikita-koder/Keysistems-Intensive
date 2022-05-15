@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import axios from "axios";
 
 export default class CommentForm extends Component{
     constructor(props){
@@ -11,20 +12,31 @@ export default class CommentForm extends Component{
     }
 
 
-    CommentChangeValue(e){
+    CommentChangeValue(event){
         this.setState({
-            text: e.target.value 
+            text: event.target.value 
         });
     }
-    onCommentSubmit(e){
-        e.preventDefault();
-        this.props.btnCommentAdd(this.state.text, this.props.postId);
+    onCommentSubmit(event){
+        event.preventDefault();
+        const commentItem = {
+            postId: this.props.postId.postId,
+            text: this.state.text
+        }
+
+        axios.post("http://localhost:3001/comment/", commentItem)
+        .then(res => {
+            console.log(res);
+            console.log(res.data);
+          })
+          
         this.setState({
             text: ''
         });
     }
 
     render(){
+        //console.log(this.props.postId.postId)
         return(
             <form className="comment-form d-flex"
                 onSubmit={this.onCommentSubmit}>

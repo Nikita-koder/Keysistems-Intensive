@@ -1,13 +1,13 @@
 
 import React from "react";
-import "./searc-panel.css"
+import "./search-panel.css"
 
 const SearcPanel = () =>{
     return(
         <input
             className="form-control"
             type="text"
-            placeholder="Searc"
+            placeholder="Search"
         />
     )
 }

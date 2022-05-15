@@ -1,15 +1,36 @@
 import React, {Component} from "react";
 import { Modal, Button } from "react-bootstrap";
+import axios from "axios";
 import CommentBox from "./comment-box";
 
 import "../modal-window/modal-window.css"
 
 export default class ModalWindow extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            commentsData: []
+        }
+    }
+
     
+
+      componentDidMount() {
+        axios.get("http://localhost:3001/comment/")
+          .then(res => {
+            //console.log(res)
+            const comments = res.data;
+            this.setState({
+                commentsData: comments 
+            });
+          })
+      }
+      
+
     render(){
-        const {post, show, handleClose, btnCommentAdd, btnLikesClick, commentsData} = this.props;
-        const {label, imgSrc, id, likes} = {...post}
-        //console.log(post.id);
+        const {post, show, handleClose, btnLikesClick} = this.props;
+        const {label, imgSrc, postId, likes} = {...post}
+        //console.log(post);
         return (
             <>
                 <Modal show={show} onHide={handleClose}>
@@ -29,10 +50,9 @@ export default class ModalWindow extends Component {
                         
                     </Modal.Body>
                     <Modal.Footer>
-                        <CommentBox commentData = {commentsData}
-                            btnCommentAdd={btnCommentAdd}
+                        <CommentBox commentData = {this.state.commentsData}
                             postId={post}
-                            id = {id}/>
+                            id = {postId}/>
                     </Modal.Footer>
                 </Modal>
             </>

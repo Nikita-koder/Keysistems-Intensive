@@ -7,3 +7,9 @@
     max-width: 300px;
     cursor: pointer;
 }
+.btn-likes{
+    background-color: aliceblue;
+}
+.btn-likes-true{
+    background-color: red;
+}

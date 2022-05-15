@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import "./app.css"
 import AppHeader from "../app-header";
-import SearcPanel from "../searc-panel";
+import SearcPanel from "../search-panel";
 import PostStatusFilter from "../post-status-filter";
 import PostList from "../post-list";
 import PostAddForm from "../post-add-form";
@@ -20,41 +20,40 @@ export default class App extends Component{
         this.newId = 'Id';
         this.newIdIter = 0;
         this.commentId = 3;
-        this.btnDeleteClick = this.btnDeleteClick.bind(this);
+        /*this.btnDeleteClick = this.btnDeleteClick.bind(this);
         this.btnLikesClick = this.btnLikesClick.bind(this);
         this.btnAddClick = this.btnAddClick.bind(this);
         this.btnCommentAdd = this.btnCommentAdd.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleShow = this.handleShow.bind(this);
-        //this.modalPost = null;
+        //this.modalPost = null;*/
     }
     
-    componentDidMount() {
-        fetch("https://localhost:3001/post/")
+    componentDidMount = () =>{
+        fetch("http://localhost:3001/post")
           .then(res => res.json())
           .then(
             (result) => {
-              this.setState({
-                data: result.post_info
-              });
+                //console.log(result)
+                this.setState({
+                    data: result
+                });
             },
             // Примечание: важно обрабатывать ошибки именно здесь, а не в блоке catch(),
             // чтобы не перехватывать исключения из ошибок в самих компонентах.
             (error) => {
-              this.setState({
-                error
-              });
+              console.log(error)
             }
           )
       }
-
-    btnLikesClick(){
+      
+    btnLikesClick=()=>{
         this.setState(state=>({
             likes: ++state.likes
         }))
     }
   
-    handleClose () {
+    handleClose =()=> {
         this.setState(()=>{
             return{
                 show: false,
@@ -62,8 +61,9 @@ export default class App extends Component{
             }
         });
     }
-    handleShow (postId){
-        
+
+    handleShow =(postId)=>{
+        //console.log(postId);
         this.setState(()=>{
             return{
                 show: true,
@@ -73,7 +73,7 @@ export default class App extends Component{
     }
     
 
-    btnDeleteClick(id){
+   /* btnDeleteClick=(id)=>{
         this.setState(({data})=>{
             const index = data.findIndex(elem => elem.id === id);
             const befor = data.slice(0, index);
@@ -84,25 +84,9 @@ export default class App extends Component{
                 data: newData
             } 
         });
-    }
+    }*/
 
-    btnAddClick(text){
-        let idForClick = this.newId + this.newIdIter;
-        const newItem = {
-            label: text,
-            likes: 0,
-            id: idForClick
-        }
-        this.newIdIter++
-        this.setState(({data}) =>{
-            const newData = [...data, newItem];
-            return{
-                data: newData
-            }
-        })
-    }
-
-    btnCommentAdd(text, postId){
+    /*btnCommentAdd=(text, postId)=>{
         let idForClick = this.commentId;
 
         console.log(idForClick)
@@ -119,18 +103,20 @@ export default class App extends Component{
                 commentsData: newData
             }
         });
-    }
+    }*/
+    
     render(){
-        this.modalPost = this.state.data.find(post => post.id === this.state.selectPostId);
+        this.modalPost = this.state.data.find(post => post.postId === this.state.selectPostId);
         
         return(
             <div className="searc-panel">
+                
                 <AppHeader/>
                 <SearcPanel/>
                 <PostStatusFilter/>
                 <PostList
                     props={this.state.data}
-                    btnDeleteClick={this.btnDeleteClick}
+                    /*btnDeleteClick={this.btnDeleteClick}*/
                     handleShow={this.handleShow}
                     />
                 
@@ -142,7 +128,8 @@ export default class App extends Component{
                     handleClose={this.handleClose}
                     btnCommentAdd={this.btnCommentAdd}
                     btnLikesClick={this.btnLikesClick}
-                    commentsData={this.state.commentsData}>
+                    /*commentsData={this.state.commentsData}*/
+                    >
                     
                 </ModalWindow>
             </div>

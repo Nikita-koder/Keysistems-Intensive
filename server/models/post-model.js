@@ -23,7 +23,7 @@ Post.create = (newPost, result) => {
 };
 
 Post.findById = (id, result) => {
-  sql.query(`SELECT * FROM post_info WHERE id = ${id}`, (err, res) => {
+  sql.query(`SELECT * FROM post_info WHERE postId = ${id}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -75,8 +75,8 @@ Post.getAllPublished = result => {
 
 Post.updateById = (id, posts, result) => {
   sql.query(
-    "UPDATE post_info SET label = ?, imgSrc = ?, likes = ?, commentsCounter = ? WHERE id = ?",
-    [posts.label, posts.imgSrc, posts.likes, posts.commentsCounter, id],
+    "UPDATE post_info SET likes = ? WHERE postId = ?",
+    [posts.likes, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -97,7 +97,7 @@ Post.updateById = (id, posts, result) => {
 };
 
 Post.remove = (id, result) => {
-  sql.query("DELETE FROM post_info WHERE id = ?", id, (err, res) => {
+  sql.query("DELETE FROM post_info WHERE postId = ?", id, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

@@ -5,10 +5,11 @@ const postsRouter = require("./server/routes/post-routes.js");
 const commentsRouter = require('./server/routes/comment-routes')
 
 var corsOption = {
-    origin: 'http://localhost:3001'
+    origin: 'http://localhost:3000'
 }
 
 app.use(cors(corsOption));
+//app.use(cors);
 // parse requests of content-type - application/json
 app.use(express.json());
 // simple route

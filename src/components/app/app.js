@@ -46,12 +46,6 @@ export default class App extends Component{
             }
           )
       }
-      
-    btnLikesClick=()=>{
-        this.setState(state=>({
-            likes: ++state.likes
-        }))
-    }
   
     handleClose =()=> {
         this.setState(()=>{
@@ -104,7 +98,7 @@ export default class App extends Component{
             }
         });
     }*/
-    
+
     render(){
         this.modalPost = this.state.data.find(post => post.postId === this.state.selectPostId);
         
